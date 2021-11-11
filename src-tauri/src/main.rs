@@ -34,7 +34,18 @@ fn request(url: String) -> Result<String, String> {
   }
 
   let response = str::from_utf8(&buf).unwrap().to_string();
-  Ok(response.into())
+  let headers = response
+    .lines()
+    .take_while(|line| !line.is_empty())
+    .collect::<Vec<_>>();
+
+  let body = response
+    .lines()
+    .skip_while(|line| !line.is_empty())
+    .collect::<Vec<_>>()
+    .join("\n");
+
+  Ok(body.into())
 
   // Ok("this worked".into())
 }
