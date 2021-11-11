@@ -21,10 +21,10 @@ export default function Header() {
   const [{ url }, dispatch] = useViewport();
 
   useEffect(() => {
-    invoke('fetch', { url: url }).then((res) =>
-      dispatch(['SET_VIEWPORT', lll])
+    invoke('request', { url: url }).then((res) =>
+      dispatch(['SET_VIEWPORT', res])
     );
-  }, [url, dispatch]);
+  }, []);
 
   return (
     <Flex
